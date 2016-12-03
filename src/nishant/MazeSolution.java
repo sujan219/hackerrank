@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class MazeSolution implements Solution {
 	
-	private boolean[][] isVisited;
+//	private boolean[][] isVisited;
 	private int[][] maze;
 	private int endRow, endCol;
 	private int rows, cols;
@@ -19,7 +19,7 @@ public class MazeSolution implements Solution {
 		this.endCol = endCol;
 		this.rows = rows;
 		this.cols = cols;
-		isVisited = new boolean[rows][cols];
+//		isVisited = new boolean[rows][cols];
 	}
 	
 	private class Node{
@@ -43,7 +43,7 @@ public class MazeSolution implements Solution {
 			queue.add(new Node(0, 0, 0));
 			while(!queue.isEmpty()){
 				Node node = queue.remove();
-				isVisited[node.x][node.y] = true;
+				maze[node.x][node.y] = 1;
 				checkRightNode(node, queue);
 				checkLeftNode(node, queue);
 				checkTopNode(node, queue);
@@ -59,25 +59,25 @@ public class MazeSolution implements Solution {
 	}
 	
 	private void checkRightNode(Node node, Queue<Node> queue){
-		if(node.x+1<rows && maze[node.x+1][node.y] == 0 && !isVisited[node.x+1][node.y]){
+		if(node.x+1<rows && maze[node.x+1][node.y] == 0){
 			queue.add(new Node(node.x+1, node.y, node.length+1));
 		}
 	}
 	
 	private void checkLeftNode(Node node, Queue<Node> queue){
-		if(node.x-1>=0 && maze[node.x-1][node.y] == 0 && !isVisited[node.x-1][node.y]){
+		if(node.x-1>=0 && maze[node.x-1][node.y] == 0){
 			queue.add(new Node(node.x-1, node.y, node.length+1));
 		}
 	}
 	
 	private void checkTopNode(Node node, Queue<Node> queue){
-		if(node.y-1>=0 && maze[node.x][node.y-1] == 0 && !isVisited[node.x][node.y-1]){
+		if(node.y-1>=0 && maze[node.x][node.y-1] == 0){
 			queue.add(new Node(node.x, node.y-1, node.length+1));
 		}
 	}
 	
 	private void checkBottomNode(Node node, Queue<Node> queue){
-		if(node.y+1<cols && maze[node.x][node.y+1] == 0 && !isVisited[node.x][node.y+1]){
+		if(node.y+1<cols && maze[node.x][node.y+1] == 0){
 			queue.add(new Node(node.x, node.y+1, node.length+1));
 		}
 	}
